@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server'
+import type { NextApiRequest, NextApiResponse } from 'next'
 import { sql } from '@/lib/db'
 import { Resend } from 'resend'
 
