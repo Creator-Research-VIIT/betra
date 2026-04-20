@@ -66,7 +66,7 @@ export function BannerSlider() {
       <Carousel
         setApi={setApi}
         plugins={[plugin.current]}
-        className="w-full h-[220px] md:h-[280px] lg:h-[320px]"
+        className="w-full h-[400px] md:h-[500px] lg:h-[600px]"
         onMouseEnter={plugin.current.stop}
         onMouseLeave={plugin.current.reset}
         opts={{ loop: true }}
@@ -75,11 +75,10 @@ export function BannerSlider() {
           {slides.map((slide, index) => (
             <CarouselItem
               key={index}
-              className="pl-0 h-[220px] md:h-[280px] lg:h-[320px] relative"
+              className="pl-0 h-[400px] md:h-[500px] lg:h-[600px] relative"
             >
-              {/* Background wrapper to center image */}
+              {/* Background wrapper */}
               <div className="relative w-full h-full overflow-hidden bg-black flex items-center justify-center">
-
                 <Image
                   src={slide.image}
                   alt={slide.alt}
@@ -87,7 +86,6 @@ export function BannerSlider() {
                   className="object-contain"
                   priority={index === 0}
                 />
-
               </div>
             </CarouselItem>
           ))}
@@ -102,10 +100,11 @@ export function BannerSlider() {
           {Array.from({ length: count }).map((_, i) => (
             <button
               key={i}
-              className={`h-2.5 rounded-full transition-all ${i + 1 === current
+              className={`h-2.5 rounded-full transition-all ${
+                i + 1 === current
                   ? "bg-white w-8"
                   : "bg-white/50 w-2.5"
-                }`}
+              }`}
               onClick={() => api?.scrollTo(i)}
             />
           ))}
