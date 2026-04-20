@@ -47,7 +47,7 @@ export function BannerSlider() {
   const [count, setCount] = React.useState(0)
 
   const plugin = React.useRef(
-    Autoplay({ delay: 5000, stopOnInteraction: true })
+    Autoplay({ delay: 4000, stopOnInteraction: true })
   )
 
   React.useEffect(() => {
@@ -66,41 +66,55 @@ export function BannerSlider() {
       <Carousel
         setApi={setApi}
         plugins={[plugin.current]}
-        className="w-full h-[300px] md:h-[400px] lg:h-[500px]"
+        className="w-full"
         onMouseEnter={plugin.current.stop}
         onMouseLeave={plugin.current.reset}
         opts={{ loop: true }}
       >
-        <CarouselContent className="h-full ml-0">
+        <CarouselContent className="ml-0">
           {slides.map((slide, index) => (
             <CarouselItem
               key={index}
-              className="pl-0 h-[300px] md:h-[400px] lg:h-[500px] relative"
+              className="pl-0 relative w-full h-[220px] sm:h-[300px] md:h-[400px] lg:h-[500px]"
             >
-              {/* Background wrapper */}
-              <div className="relative w-full h-full overflow-hidden bg-black flex items-center justify-center">
+              <div className="relative w-full h-full overflow-hidden">
+
+                {/* Image */}
                 <Image
                   src={slide.image}
                   alt={slide.alt}
                   fill
-                  className="object-contain"
+                  sizes="100vw"
+                  className="object-cover"
                   priority={index === 0}
                 />
+
+                {/* Dark overlay */}
+                <div className="absolute inset-0 bg-black/40" />
+
+                {/* Title */}
+                <div className="absolute inset-0 flex items-center justify-center text-center px-4">
+                  <h2 className="text-white text-lg sm:text-2xl md:text-3xl lg:text-4xl font-semibold leading-snug max-w-3xl">
+                    {slide.title}
+                  </h2>
+                </div>
+
               </div>
             </CarouselItem>
           ))}
         </CarouselContent>
 
-        {/* Navigation Arrows */}
-        <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black/30 hover:bg-black/50 text-white border-none" />
-        <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black/30 hover:bg-black/50 text-white border-none" />
+        {/* Navigation Arrows (hidden on mobile) */}
+        <CarouselPrevious className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black/40 hover:bg-black/60 text-white border-none" />
+
+        <CarouselNext className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black/40 hover:bg-black/60 text-white border-none" />
 
         {/* Pagination Dots */}
-        <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
+        <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-2">
           {Array.from({ length: count }).map((_, i) => (
             <button
               key={i}
-              className={`h-2.5 rounded-full transition-all ${
+              className={`h-2.5 rounded-full transition-all duration-300 ${
                 i + 1 === current
                   ? "bg-white w-8"
                   : "bg-white/50 w-2.5"
