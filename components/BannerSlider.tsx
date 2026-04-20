@@ -2,7 +2,6 @@
 
 import * as React from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 import Autoplay from 'embla-carousel-autoplay'
 
 import {
@@ -13,49 +12,32 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from '@/components/ui/carousel'
-import { Button } from '@/components/ui/button'
 
 const slides = [
-
-  {
-    title: "Integration and Way Forward",
-    image: "/banners/integration.png",
-    alt: "Modern banking bridge representing integration",
-  },
   {
     title: "Role of Banks - A Historical Analysis of Banking",
-    image: "/banners/historical_analysis.png",
+    image: "/banners/image_2.png",
     alt: "Vintage ledgers representing historical analysis",
   },
   {
     title: "Banking after Independence (1947–1969)",
-    image: "/banners/independence.png",
+    image: "/banners/image_3.png",
     alt: "Industrial growth in post-independence India",
   },
   {
+    title: "Integration and Way Forward",
+    image: "/banners/image_1.png",
+    alt: "Modern banking bridge representing integration",
+  },
+  {
     title: "Banking after Nationalisation (1969 to 1991)",
-    image: "/banners/nationalisation_early.png",
+    image: "/banners/image_4.png",
     alt: "Social banking expansion",
   },
   {
-    title: "Financial Reforms (1991 to 2004)",
-    image: "/banners/financial_reforms.png",
-    alt: "Economic liberalization and reforms",
-  },
-  {
     title: "Nationalised Banking (2003 to 2019)",
-    image: "/banners/nationalised_late.png",
+    image: "/banners/image_5.png",
     alt: "Modern digital banking hall",
-  },
-  {
-    title: "General Review of Trends (2003 to 2019)",
-    image: "/banners/trends_review.png",
-    alt: "Financial data and trends",
-  },
-  {
-    title: "Credit Industry: NPA Management, Recapitalization & Demonetisation",
-    image: "/banners/credit_management.png",
-    alt: "Risk management and credit policy",
   },
 ]
 
@@ -69,9 +51,7 @@ export function BannerSlider() {
   )
 
   React.useEffect(() => {
-    if (!api) {
-      return
-    }
+    if (!api) return
 
     setCount(api.scrollSnapList().length)
     setCurrent(api.selectedScrollSnap() + 1)
@@ -89,41 +69,43 @@ export function BannerSlider() {
         className="w-full h-[400px] md:h-[500px] lg:h-[600px]"
         onMouseEnter={plugin.current.stop}
         onMouseLeave={plugin.current.reset}
-        opts={{
-          loop: true,
-        }}
+        opts={{ loop: true }}
       >
         <CarouselContent className="h-full ml-0">
           {slides.map((slide, index) => (
-            <CarouselItem key={index} className="pl-0 h-[400px] md:h-[500px] lg:h-[600px] relative">
-              <div className="relative w-full h-full overflow-hidden">
+            <CarouselItem
+              key={index}
+              className="pl-0 h-[400px] md:h-[500px] lg:h-[600px] relative"
+            >
+              {/* Background wrapper to center image */}
+              <div className="relative w-full h-full overflow-hidden bg-black flex items-center justify-center">
+
                 <Image
                   src={slide.image}
                   alt={slide.alt}
                   fill
-                  className="object-cover"
+                  className="object-contain"
                   priority={index === 0}
                 />
-                {/* Fallback Overlay Text (for accessibility and when images might scale differently) */}
-                <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center p-6 text-center">
-                </div>
+
               </div>
             </CarouselItem>
           ))}
         </CarouselContent>
-        
-        {/* Navigation Arrows - visible on hover */}
-        <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black/20 hover:bg-black/40 text-white border-none" />
-        <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black/20 hover:bg-black/40 text-white border-none" />
-        
+
+        {/* Navigation Arrows */}
+        <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black/30 hover:bg-black/50 text-white border-none" />
+        <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black/30 hover:bg-black/50 text-white border-none" />
+
         {/* Pagination Dots */}
         <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
           {Array.from({ length: count }).map((_, i) => (
             <button
               key={i}
-              className={`w-2.5 h-2.5 rounded-full transition-all ${
-                i + 1 === current ? "bg-white w-8" : "bg-white/50"
-              }`}
+              className={`h-2.5 rounded-full transition-all ${i + 1 === current
+                  ? "bg-white w-8"
+                  : "bg-white/50 w-2.5"
+                }`}
               onClick={() => api?.scrollTo(i)}
             />
           ))}
