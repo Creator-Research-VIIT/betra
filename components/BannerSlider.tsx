@@ -78,7 +78,7 @@ export function BannerSlider() {
               className="pl-0 relative w-full h-[220px] sm:h-[300px] md:h-[400px] lg:h-[500px]"
             >
               <div className="relative w-full h-full overflow-hidden">
-
+                
                 {/* Image */}
                 <Image
                   src={slide.image}
@@ -88,16 +88,6 @@ export function BannerSlider() {
                   className="object-cover"
                   priority={index === 0}
                 />
-
-                {/* Dark overlay */}
-                <div className="absolute inset-0 bg-black/40" />
-
-                {/* Title */}
-                <div className="absolute inset-0 flex items-center justify-center text-center px-4">
-                  <h2 className="text-white text-lg sm:text-2xl md:text-3xl lg:text-4xl font-semibold leading-snug max-w-3xl">
-                    {slide.title}
-                  </h2>
-                </div>
 
               </div>
             </CarouselItem>
