@@ -7,14 +7,13 @@ datasource db {
 }
 
 model Membership {
-  id             String   @id @default(uuid())
-  name           String
-  email          String   @unique
-  phone          String
-  address        String
-  qualification  String?
-  bankName       String?
-  accountNumber  String?
-  ifscCode       String?
-  createdAt      DateTime @default(now())
+  id               String   @id @default(uuid())
+  name             String
+  email            String
+  cellNumber       String
+  bankName         String
+  branch           String
+  branchCode       String
+  issueDescription String
+  createdAt        DateTime @default(now())
 }

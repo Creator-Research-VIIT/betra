@@ -4,91 +4,81 @@ import { useState } from 'react';
 import { User, Briefcase, BookOpen, TrendingUp } from 'lucide-react';
 import { Footer } from '@/components/Footer';
 
-type MembershipFormData = {
+// Define the BankClinic form data type matching the schema request
+type BankClinicFormData = {
   name: string;
-  addressOffice: string;
-  addressResidence: string;
-  telephoneOffice: string;
-  telephoneResidence: string;
-  cellNumber: string;
   email: string;
-  dob: string;
-  qualification: string;
-  workingInBank: string;
-  since: string;
-  designation: string;
-  remittance: string;
-  ddNo: string;
-  rtgsUtrNo: string;
-  chequeNo: string;
-  signature: string;
-  date: string;
-  place: string;
-  declaration: boolean;
+  cellNumber: string;
+  bankName: string;
+  branch: string;
+  branchCode: string;
+  issueDescription: string;
 };
 
-const initialForm: MembershipFormData = {
+const initialForm: BankClinicFormData = {
   name: '',
-  addressOffice: '',
-  addressResidence: '',
-  telephoneOffice: '',
-  telephoneResidence: '',
-  cellNumber: '',
   email: '',
-  dob: '',
-  qualification: '',
-  workingInBank: '',
-  since: '',
-  designation: '',
-  remittance: '',
-  ddNo: '',
-  rtgsUtrNo: '',
-  chequeNo: '',
-  signature: '',
-  date: '',
-  place: '',
-  declaration: false, //
+  cellNumber: '',
+  bankName: '',
+  branch: '',
+  branchCode: '',
+  issueDescription: '',
 };
 
 export default function MembershipPage() {
-  const [form, setForm] = useState<MembershipFormData>(initialForm);
-  const [errors, setErrors] = useState<{ [K in keyof MembershipFormData]?: string }>({});
+  const [form, setForm] = useState<BankClinicFormData>(initialForm);
+  const [errors, setErrors] = useState<{ [K in keyof BankClinicFormData]?: string }>({});
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState('');
   const [apiSuccess, setApiSuccess] = useState('');
 
+  // Handle generalized input mapping
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const target = e.target;
-      const name = target.name;
+    const name = target.name;
+    let value = target.value;
 
-      setForm((prev) => ({
-        ...prev,
-        [name]: target instanceof HTMLInputElement && target.type === 'checkbox'
-          ? target.checked
-          : target.value,
-      }));
+    if (name === 'cellNumber') {
+      value = value.replace(/\D/g, '').slice(0, 10);
+    }
 
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
     setErrors((prev) => ({ ...prev, [name]: undefined }));
     setApiError('');
     setApiSuccess('');
   }
 
-  function validate(form: MembershipFormData) {
-    const newErrors: { [K in keyof MembershipFormData]?: string } = {};
-    if (!form.name.trim()) newErrors.name = 'Name is required';
-    if (!form.email.trim()) newErrors.email = 'Email is required';
-    if (
-      !form.cellNumber.trim() &&
-      !form.telephoneOffice.trim() &&
-      !form.telephoneResidence.trim()
-    ) {
-      newErrors.cellNumber = 'At least one phone number is required';
+  function validate(form: BankClinicFormData) {
+    const newErrors: { [K in keyof BankClinicFormData]?: string } = {};
+
+    // Name should not accept numbers or special characters (only alphabets and spaces)
+    if (!form.name.trim()) {
+      newErrors.name = 'Name is required';
+    } else if (!/^[A-Za-z\s]+$/.test(form.name)) {
+      newErrors.name = 'Name must only contain alphabets and spaces';
     }
 
-    if (!form.declaration) {
-      newErrors.declaration = 'You must accept the declaration';
+    if (!form.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/^\S+@\S+\.\S+$/.test(form.email)) {
+      newErrors.email = 'Please enter a valid email address';
     }
+
+    if (!form.cellNumber.trim()) {
+      newErrors.cellNumber = 'Cell Number is required';
+    } else if (!/^\d{10}$/.test(form.cellNumber)) {
+      newErrors.cellNumber = 'Cell Number must be exactly 10 digits';
+    }
+
+    if (!form.bankName.trim()) newErrors.bankName = 'Bank Name is required';
+    if (!form.branch.trim()) newErrors.branch = 'Branch is required';
+    if (!form.branchCode.trim()) newErrors.branchCode = 'Branch Code is required';
+    if (!form.issueDescription.trim()) newErrors.issueDescription = 'Issue Description is required';
+
     return newErrors;
   }
 
@@ -108,7 +98,7 @@ export default function MembershipPage() {
         });
         const data = await res.json();
         if (res.ok) {
-          setApiSuccess('Membership submitted!');
+          setApiSuccess('Issue submitted successfully!');
           setSubmitted(true);
           setForm(initialForm);
         } else {
@@ -124,15 +114,14 @@ export default function MembershipPage() {
 
   return (
     <>
-      {/* <Header /> */}
       <div className="bg-gray-50 min-h-screen w-full">
         {/* HERO SECTION */}
         <section className="w-full bg-[#0a1a3a] py-12 px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Become a Member of BETRA
+            Bank Clinic Support
           </h1>
           <p className="text-lg md:text-xl text-white max-w-2xl mx-auto">
-            Join our network of banking professionals and institutions
+            Report your banking-related issues to our expert panel for resolution.
           </p>
         </section>
 
@@ -141,23 +130,23 @@ export default function MembershipPage() {
           <div className="grid md:grid-cols-4 gap-6">
             <BenefitCard
               icon={<BookOpen className="w-8 h-8 text-blue-700" />}
-              title="Expert Training Programs"
-              desc="Access industry-leading training and certification programs."
+              title="Expert Review"
+              desc="Your issue will be reviewed by banking experts."
             />
             <BenefitCard
               icon={<User className="w-8 h-8 text-blue-700" />}
-              title="Networking Opportunities"
-              desc="Connect with peers, leaders, and institutions in banking."
+              title="Dedicated Support"
+              desc="Receive personalized support for your grievances."
             />
             <BenefitCard
               icon={<Briefcase className="w-8 h-8 text-blue-700" />}
-              title="Research & Insights"
-              desc="Stay updated with the latest research and financial insights."
+              title="Rapid Conflict Resolution"
+              desc="We work closely with institutions for swift closures."
             />
             <BenefitCard
               icon={<TrendingUp className="w-8 h-8 text-blue-700" />}
-              title="Career Growth Support"
-              desc="Enhance your career with exclusive resources and support."
+              title="Empowerment"
+              desc="We advocate for fair and transparent banking rights."
             />
           </div>
         </section>
@@ -167,10 +156,10 @@ export default function MembershipPage() {
           <div className="bg-white rounded-2xl shadow-lg p-6 md:p-10 space-y-6">
             <div>
               <h2 className="text-2xl md:text-3xl font-bold text-blue-900 mb-2 text-center">
-                Membership Application Form
+                Bank Clinic Issue Form
               </h2>
               <p className="text-center text-gray-600 mb-6">
-                Fill out the form below to apply for membership at BETRA.
+                Please provide detailed information regarding the issue you face with your bank.
               </p>
             </div>
             {submitted && apiSuccess ? (
@@ -186,6 +175,7 @@ export default function MembershipPage() {
                     value={form.name}
                     onChange={handleChange}
                     required
+                    placeholder="Enter your full name"
                     error={errors.name}
                   />
                   <InputField
@@ -195,146 +185,59 @@ export default function MembershipPage() {
                     value={form.email}
                     onChange={handleChange}
                     required
+                    placeholder="Enter your email address"
                     error={errors.email}
                   />
 
                   <InputField
                     label="Cell Number"
                     name="cellNumber"
+                    type="text"
                     value={form.cellNumber}
                     onChange={handleChange}
+                    required
+                    placeholder="Enter 10-digit mobile number"
                     error={errors.cellNumber}
                   />
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <InputField
-                      label="Telephone (Office)"
-                      name="telephoneOffice"
-                      value={form.telephoneOffice}
-                      onChange={handleChange}
-                    />
-                    <InputField
-                      label="Telephone (Residence)"
-                      name="telephoneResidence"
-                      value={form.telephoneResidence}
-                      onChange={handleChange}
-                    />
-                  </div>
-
                   <InputField
-                    label="Date of Birth"
-                    name="dob"
-                    type="date"
-                    value={form.dob}
+                    label="Bank to which issue relates"
+                    name="bankName"
+                    value={form.bankName}
                     onChange={handleChange}
+                    required
+                    placeholder="Enter bank name (e.g., SBI, HDFC)"
+                    error={errors.bankName}
+                  />
+                  
+                  <InputField
+                    label="Branch"
+                    name="branch"
+                    value={form.branch}
+                    onChange={handleChange}
+                    required
+                    placeholder="Enter branch name"
+                    error={errors.branch}
                   />
                   <InputField
-                    label="Educational Qualification"
-                    name="qualification"
-                    value={form.qualification}
+                    label="Branch Code"
+                    name="branchCode"
+                    value={form.branchCode}
                     onChange={handleChange}
-                  />
-
-                  <InputField
-                    label="Working in Bank"
-                    name="workingInBank"
-                    value={form.workingInBank}
-                    onChange={handleChange}
-                  />
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <InputField
-                      label="Since"
-                      name="since"
-                      value={form.since}
-                      onChange={handleChange}
-                    />
-                    <InputField
-                      label="Designation"
-                      name="designation"
-                      value={form.designation}
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  <InputField
-                    label="Remittance in Rupees"
-                    name="remittance"
-                    value={form.remittance}
-                    onChange={handleChange}
-                  />
-                  <InputField
-                    label="DD No."
-                    name="ddNo"
-                    value={form.ddNo}
-                    onChange={handleChange}
-                  />
-                  <InputField
-                    label="RTGS / NEFT UTR No."
-                    name="rtgsUtrNo"
-                    value={form.rtgsUtrNo}
-                    onChange={handleChange}
-                  />
-                  <InputField
-                    label="Cheque No."
-                    name="chequeNo"
-                    value={form.chequeNo}
-                    onChange={handleChange}
+                    required
+                    placeholder="Enter branch code"
+                    error={errors.branchCode}
                   />
 
                   <InputField
-                    label="Address (Office)"
-                    name="addressOffice"
-                    value={form.addressOffice}
+                    label="Issue Description"
+                    name="issueDescription"
+                    value={form.issueDescription}
                     onChange={handleChange}
                     textarea
+                    required
+                    placeholder="Describe your issue in detail..."
                     containerClass="md:col-span-2"
-                  />
-                  <InputField
-                    label="Address (Residence)"
-                    name="addressResidence"
-                    value={form.addressResidence}
-                    onChange={handleChange}
-                    textarea
-                    containerClass="md:col-span-2"
-                  />
-
-                  <div className="md:col-span-2 flex items-start gap-3 mt-4">
-                    <input
-                      type="checkbox"
-                      id="declaration"
-                      name="declaration"
-                      checked={form.declaration}
-                      onChange={handleChange}
-                      className="mt-1 h-4 w-4"
-                    />
-                    <label htmlFor="declaration" className="text-sm text-gray-700">
-                      I hereby declare that the information provided above is true and correct.
-                    </label>
-                  </div>
-
-                  {errors.declaration && (
-                    <div className="md:col-span-2 text-red-600 text-sm">
-                      {errors.declaration}
-                    </div>
-                  )}
-
-                  <InputField
-                    label="Signature"
-                    name="signature"
-                    value={form.signature}
-                    onChange={handleChange}
-                  />
-                  <InputField
-                    label="Date"
-                    name="date"
-                    type="date"
-                    value={form.date}
-                    onChange={handleChange}
-                  />
-                  <InputField
-                    label="Place"
-                    name="place"
-                    value={form.place}
-                    onChange={handleChange}
+                    error={errors.issueDescription}
                   />
                 </div>
                 <button
@@ -342,7 +245,7 @@ export default function MembershipPage() {
                   className="mt-8 w-full bg-[#0a1a3a] text-white py-3 rounded-lg font-semibold text-lg shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 transition-all duration-200"
                   disabled={loading}
                 >
-                  {loading ? 'Submitting...' : 'Submit'}
+                  {loading ? 'Submitting...' : 'Submit Issue'}
                 </button>
                 {apiError && (
                   <div className="mt-4 text-center text-red-600">{apiError}</div>
@@ -357,9 +260,10 @@ export default function MembershipPage() {
   );
 }
 
+// Below are standard UI properties
 type InputFieldProps = {
   label: string;
-  name: keyof MembershipFormData;
+  name: keyof BankClinicFormData;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   type?: string;
@@ -367,6 +271,7 @@ type InputFieldProps = {
   required?: boolean;
   error?: string;
   containerClass?: string;
+  placeholder?: string;
 };
 
 function InputField({
@@ -379,6 +284,7 @@ function InputField({
   required,
   error,
   containerClass = '',
+  placeholder,
 }: InputFieldProps) {
   return (
     <div className={`flex flex-col ${containerClass} box-border max-w-full`}>
@@ -392,10 +298,11 @@ function InputField({
           name={name}
           value={value}
           onChange={onChange}
+          placeholder={placeholder}
           className={`w-full max-w-full box-border border rounded-lg px-3 py-2 text-base text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none ${
             error ? 'border-red-500' : 'border-gray-300'
           }`}
-          rows={3}
+          rows={5}
         />
       ) : (
         <input
@@ -404,6 +311,7 @@ function InputField({
           type={type}
           value={value}
           onChange={onChange}
+          placeholder={placeholder}
           className={`w-full max-w-full box-border border rounded-lg px-3 py-2 text-base text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 ${
             error ? 'border-red-500' : 'border-gray-300'
           }`}
@@ -431,3 +339,4 @@ function BenefitCard({ icon, title, desc }: BenefitCardProps) {
     </div>
   );
 }
+

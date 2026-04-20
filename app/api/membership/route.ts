@@ -1,4 +1,4 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
+import { NextResponse } from 'next/server'
 import { sql } from '@/lib/db'
 import { Resend } from 'resend'
 
@@ -10,79 +10,45 @@ export async function POST(req: Request) {
 
     const {
       name,
-      addressOffice,
-      addressResidence,
-      telephoneOffice,
-      telephoneResidence,
-      cellNumber,
       email,
-      dob,
-      qualification,
-      workingInBank,
-      since,
-      designation,
-      remittance,
-      ddNo,
-      rtgsUtrNo,
-      chequeNo,
-      signature,
-      date,
-      place,
-      declaration,
+      cellNumber,
+      bankName,
+      branch,
+      branchCode,
+      issueDescription
     } = body
 
     /* -------------------- VALIDATION -------------------- */
-    if (!name || !email || !declaration) {
+    if (!name || !email || !cellNumber || !bankName || !branch || !branchCode || !issueDescription) {
       return NextResponse.json(
-        { error: 'Name, Email and Declaration are required' },
+        { error: 'All fields are required' },
         { status: 400 }
       )
     }
 
     /* -------------------- 1. STORE IN DATABASE -------------------- */
+    // Note: Table remains 'membership' to match database OR replacing it with "Membership" casing
     await sql`
-      INSERT INTO membership (
+      INSERT INTO "Membership" (
+        id,
         name,
-        address_office,
-        address_residence,
-        telephone_office,
-        telephone_residence,
-        cell_number,
         email,
-        dob,
-        qualification,
-        working_in_bank,
-        since,
-        designation,
-        remittance,
-        dd_no,
-        rtgs_utr_no,
-        cheque_no,
-        signature,
-        date,
-        place,
-        declaration
+        "cellNumber",
+        "bankName",
+        branch,
+        "branchCode",
+        "issueDescription",
+        "createdAt"
       ) VALUES (
+        gen_random_uuid(),
         ${name},
-        ${addressOffice},
-        ${addressResidence},
-        ${telephoneOffice},
-        ${telephoneResidence},
-        ${cellNumber},
         ${email},
-        ${dob || null},
-        ${qualification},
-        ${workingInBank},
-        ${since},
-        ${designation},
-        ${remittance},
-        ${ddNo},
-        ${rtgsUtrNo},
-        ${chequeNo},
-        ${signature},
-        ${date || null},
-        ${place},
-        ${declaration}
+        ${cellNumber},
+        ${bankName},
+        ${branch},
+        ${branchCode},
+        ${issueDescription},
+        NOW()
       )
     `
 
@@ -91,47 +57,31 @@ export async function POST(req: Request) {
       from: "BETRA <onboarding@resend.dev>",
       to: ["khushboo.22210887@viit.ac.in"], // 👉 PUT YOUR EMAIL HERE
        
-
-      subject: "New Membership Form Submission",
+      subject: "New Bank Clinic Issue Submitted",
 
       html: `
-        <h2>New Membership Application</h2>
+        <h2>New Bank Clinic Submission</h2>
 
         <p><b>Name:</b> ${name}</p>
         <p><b>Email:</b> ${email}</p>
-        <p><b>Phone:</b> ${cellNumber}</p>
-        <p><b>Qualification:</b> ${qualification}</p>
-        <p><b>Working In Bank:</b> ${workingInBank}</p>
-        <p><b>Since:</b> ${since}</p>
-        <p><b>Designation:</b> ${designation}</p>
+        <p><b>Cell Number:</b> ${cellNumber}</p>
 
         <hr/>
 
-        <p><b>Remittance:</b> ${remittance}</p>
-        <p><b>DD No:</b> ${ddNo}</p>
-        <p><b>RTGS/UTR No:</b> ${rtgsUtrNo}</p>
-        <p><b>Cheque No:</b> ${chequeNo}</p>
+        <p><b>Bank Name:</b> ${bankName}</p>
+        <p><b>Branch:</b> ${branch}</p>
+        <p><b>Branch Code:</b> ${branchCode}</p>
 
         <hr/>
 
-        <p><b>Office Address:</b> ${addressOffice}</p>
-        <p><b>Residence Address:</b> ${addressResidence}</p>
-
-        <hr/>
-
-        <p><b>Signature:</b> ${signature}</p>
-        <p><b>Date:</b> ${date}</p>
-        <p><b>Place:</b> ${place}</p>
-
-        <hr/>
-
-        <p><b>Declaration:</b> ${declaration ? 'Accepted' : 'Not Accepted'}</p>
+        <p><b>Issue Description:</b></p>
+        <p>${issueDescription}</p>
       `,
     })
 
     /* -------------------- SUCCESS -------------------- */
     return NextResponse.json(
-      { message: 'Saved + Email Sent Successfully' },
+      { message: 'Issue Saved + Email Sent Successfully' },
       { status: 200 }
     )
 
@@ -143,4 +93,4 @@ export async function POST(req: Request) {
       { status: 500 }
     )
   }
-}
+}

@@ -64,7 +64,7 @@ export default function Contact() {
                     <div>
                       <p className="font-semibold">Email</p>
                       <p className="text-sm text-muted-foreground">
-                        contact@betra.in
+                        betracsn@gmail.com
                       </p>
                     </div>
                   </div>

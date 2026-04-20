@@ -1,5 +1,4 @@
-import Link from 'next/link'
-// import { Header } from '@/components/Header'
+import { BannerSlider } from '@/components/BannerSlider'
 import { Footer } from '@/components/Footer'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
@@ -12,38 +11,8 @@ export default function Home() {
 
       <main>
 
-        {/* 🔥 HERO SECTION (REAL CONTENT + PREMIUM UI) */}
-        <section className="bg-[#0a1a3a] text-white">
-          <div className="mx-auto max-w-7xl px-6 py-16">
-
-            <p className="text-xl md:text-2xl text-blue-300 mb-4 font-semibold tracking-wide">
-              Banking Education Training & Research Academy (BETRA)
-            </p>
-
-            <h1 className="text-5xl md:text-6xl font-bold leading-tight">
-              Committed to Knowledge. <br />
-              Dedicated to Banking Excellence.
-            </h1>
-
-            <p className="mt-6 max-w-2xl text-lg text-gray-300">
-              BETRA is a specialized institution focused on banking education, financial literacy, training, and research to strengthen India’s financial ecosystem.
-            </p>
-
-            <p className="mt-4 text-sm text-gray-400">
-              Chhatrapati Sambhajinagar, Maharashtra
-            </p>
-
-            <div className="mt-10 flex gap-4">
-              <Button asChild className="bg-white text-black hover:bg-gray-200">
-                <Link href="/about">Learn More</Link>
-              </Button>
-
-              <Button asChild variant="outline" className="bg-white text-black hover:bg-gray-200">
-                <Link href="/contact">Contact Us</Link>
-              </Button>
-            </div>
-          </div>
-        </section>
+        {/* 🔥 DYNAMIC HERO CAROUSEL */}
+        <BannerSlider />
 
         {/* 🔥 OVERVIEW SECTION */}
         <section className="mx-auto max-w-7xl px-6 py-20 text-center">

@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Menu, X } from 'lucide-react'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
@@ -14,16 +14,43 @@ const navigation = [
   { name: 'Downloads', href: '/downloads' },
   { name: 'Gallery', href: '/gallery' },
   { name: 'Blog', href: '/blog' },
-  { name: 'Membership', href: '/membership' },
+  { name: 'Bank Clinic', href: '/membership' },
   { name: 'Contact Us', href: '/contact' },
 ]
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
   const pathname = usePathname()
 
+  useEffect(() => {
+  let lastScrollY = window.scrollY
+
+  const handleScroll = () => {
+    const currentScrollY = window.scrollY
+
+    if (currentScrollY > lastScrollY && currentScrollY > 50) {
+      // scrolling DOWN
+      setIsScrolled(true)
+    } else {
+      // scrolling UP
+      setIsScrolled(false)
+    }
+
+    lastScrollY = currentScrollY
+  }
+
+  window.addEventListener('scroll', handleScroll, { passive: true })
+  return () => window.removeEventListener('scroll', handleScroll)
+}, [])
+
   return (
-    <header className="fixed top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header 
+      className={`fixed top-0 z-[1000] w-full transition-all duration-300 ${
+        `${isScrolled ? '-translate-y-full' : 'translate-y-0'} 
+ bg-background/95 shadow-md backdrop-blur border-b border-border`
+      }`}
+    >
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-24 items-center justify-between">
           {/* Logo + Text */}
@@ -78,7 +105,7 @@ export function Header() {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="border-t border-border md:hidden">
+          <div className="border-t border-border md:hidden bg-background">
             <div className="space-y-1 px-2 pb-3 pt-2">
               {navigation.map((item) => {
                 const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))

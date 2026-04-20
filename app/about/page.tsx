@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 
 import { Footer } from '@/components/Footer'
 import { Card, CardContent } from '@/components/ui/card'
-import { Shield, Users, GraduationCap, Landmark, Briefcase } from 'lucide-react'
+import { Shield, Users, GraduationCap, Landmark, Briefcase, User } from 'lucide-react'
 // import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
@@ -211,7 +211,40 @@ export default function About() {
   </div>
 </section>
 
-        {/* 🔥 INSTITUTIONAL CHARTER */}
+        {/* 🔥 BOARD OF TRUSTEES SECTION */}
+        <section className="py-24 bg-white">
+          <div className="mx-auto max-w-7xl px-6">
+            <div className="text-center mb-16">
+              <p className="text-xs uppercase text-gray-500 tracking-widest">Leadership</p>
+              <h2 className="text-4xl font-bold text-gray-900 mt-2">
+                Board of Trustees
+              </h2>
+              <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
+                Guiding our mission with decades of collective experience in banking and finance.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {[
+                { name: 'Devidas Tuljapurkar', role: 'Chairman' },
+                { name: 'Jagdish Bhavthankar', role: 'Secretary' },
+                { name: 'Ravi Dhamangaonkar', role: 'Treasurer' },
+                { name: 'K. N. Thigale', role: 'Member' },
+                { name: 'B. S. Sawant', role: 'Member' },
+                { name: 'Dhananjay Kulkarni', role: 'Member' },
+                { name: 'Uttam Bhakare', role: 'Member' },
+              ].map((trustee, i) => (
+                <div key={i} className="flex flex-col items-center bg-gray-50 rounded-2xl p-6 border border-gray-100 hover:shadow-lg transition">
+                  <div className="w-16 h-16 bg-[#0a1a3a] rounded-full flex items-center justify-center text-white mb-4 shadow-md">
+                    <User size={32} />
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-900 text-center">{trustee.name}</h3>
+                  <p className="text-sm text-blue-800 font-medium mt-1">{trustee.role}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* 🔥 INSTITUTIONAL CHARTER (MODERN UI LIKE IMAGE) */}
 <section className="py-24 bg-gray-50">
