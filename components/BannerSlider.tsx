@@ -66,7 +66,7 @@ export function BannerSlider() {
       <Carousel
         setApi={setApi}
         plugins={[plugin.current]}
-        className="w-full h-[400px] md:h-[500px] lg:h-[600px]"
+        className="w-full h-[300px] md:h-[400px] lg:h-[500px]"
         onMouseEnter={plugin.current.stop}
         onMouseLeave={plugin.current.reset}
         opts={{ loop: true }}
@@ -75,7 +75,7 @@ export function BannerSlider() {
           {slides.map((slide, index) => (
             <CarouselItem
               key={index}
-              className="pl-0 h-[400px] md:h-[500px] lg:h-[600px] relative"
+              className="pl-0 h-[300px] md:h-[400px] lg:h-[500px] relative"
             >
               {/* Background wrapper */}
               <div className="relative w-full h-full overflow-hidden bg-black flex items-center justify-center">
