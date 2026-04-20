@@ -77,17 +77,14 @@ export function BannerSlider() {
               key={index}
               className="pl-0 h-[220px] md:h-[280px] lg:h-[320px] relative"
             >
-              {/* Background wrapper to center image */}
-              <div className="relative w-full h-full overflow-hidden bg-black flex items-center justify-center">
-
+              <div className="relative w-full h-full overflow-hidden">
                 <Image
                   src={slide.image}
                   alt={slide.alt}
                   fill
-                  className="object-contain"
+                  className="object-cover"
                   priority={index === 0}
                 />
-
               </div>
             </CarouselItem>
           ))}
@@ -98,14 +95,15 @@ export function BannerSlider() {
         <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black/30 hover:bg-black/50 text-white border-none" />
 
         {/* Pagination Dots */}
-        <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
+        <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-2">
           {Array.from({ length: count }).map((_, i) => (
             <button
               key={i}
-              className={`h-2.5 rounded-full transition-all ${i + 1 === current
-                  ? "bg-white w-8"
-                  : "bg-white/50 w-2.5"
-                }`}
+              className={`h-2 rounded-full transition-all ${
+                i + 1 === current
+                  ? "bg-white w-6"
+                  : "bg-white/50 w-2"
+              }`}
               onClick={() => api?.scrollTo(i)}
             />
           ))}
