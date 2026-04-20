@@ -66,7 +66,7 @@ export function BannerSlider() {
       <Carousel
         setApi={setApi}
         plugins={[plugin.current]}
-        className="w-full h-[300px] md:h-[380px] lg:h-[450px]"
+        className="w-full h-[220px] md:h-[280px] lg:h-[320px]"
         onMouseEnter={plugin.current.stop}
         onMouseLeave={plugin.current.reset}
         opts={{ loop: true }}
@@ -75,7 +75,7 @@ export function BannerSlider() {
           {slides.map((slide, index) => (
             <CarouselItem
               key={index}
-              className="pl-0 h-[300px] md:h-[380px] lg:h-[450px] relative"
+              className="pl-0 h-[220px] md:h-[280px] lg:h-[320px] relative"
             >
               {/* Background wrapper to center image */}
               <div className="relative w-full h-full overflow-hidden bg-black flex items-center justify-center">
