@@ -1,153 +1,153 @@
 import { Metadata } from 'next'
 import Image from 'next/image'
-// import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
-import { ArrowRight } from 'lucide-react'
+import { FileText, BarChart2, Landmark } from 'lucide-react'
 import Link from 'next/link'
+import { blogs } from '@/data/blogs'
 
 export const metadata: Metadata = {
   title: 'Insights & Updates | BETRA',
-  description: 'Latest financial insights, banking analysis, and economic updates.',
+  description:
+    'Latest financial insights, banking analysis, and economic updates.',
 }
 
 export default function Blog() {
   return (
     <>
-      {/* <Header /> */}
-
       <main>
-
-        {/* 🔥 HERO (PREMIUM GRADIENT) */}
-        {/* bg-gradient-to-br from-[#0a1a3a] via-[#0f2a5a] to-black */}
-        <section className="relative bg-[#0a1a3a] text-white overflow-hidden">
-          <div className="absolute bg-[#0a1a3a] inset-0 opacity-30" />
-
-          <div className="relative mx-auto max-w-7xl px-6 py-22">
-            <span className="text-xs uppercase tracking-widest bg-white/10 px-4 py-1 rounded-full backdrop-blur">
-              Insights & Analysis
-            </span>
-
-            <h1 className="mt-6 text-5xl md:text-6xl font-bold leading-tight">
-              Financial Insights <br />
-              <span className="text-gray-300">That Matter</span>
+        {/* HERO */}
+        <section className="bg-[#0a1a3a] text-white py-20 px-6">
+          <div className="max-w-7xl mx-auto">
+            <h1 className="text-5xl font-bold">
+              Financial Insights
             </h1>
-
-            <p className="mt-6 max-w-xl text-lg text-gray-300">
-              Stay informed with critical developments in banking, financial systems, and global economic trends shaping the future.
+            <p className="text-gray-300 mt-4 max-w-xl">
+              Stay informed with banking, finance, and global trends.
             </p>
           </div>
         </section>
 
-        {/* 🔥 BLOG CONTENT */}
-        <section className="mx-auto max-w-6xl px-6 py-24 space-y-20">
+        {/* BLOGS */}
+        <section className="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-10">
+          {blogs.map((blog) => (
+            <article
+              key={blog.id}
+              className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition flex flex-col overflow-hidden"
+            >
+              {/* IMAGE */}
+              {blog.image ? (
+                <div className="relative h-[250px] bg-gray-100 flex items-center justify-center">
+                  <Image
+                    src={blog.image}
+                    alt={blog.title}
+                    width={1200}
+                    height={600}
+                    className="h-full w-full object-contain"
+                  />
+                </div>
+              ) : (
+                <div
+                  className={`h-[250px] flex flex-col items-center justify-center gap-4 px-6
+                    ${
+                      blog.color === 'red'
+                        ? 'bg-gradient-to-br from-red-50 to-red-100'
+                        : blog.color === 'blue'
+                        ? 'bg-gradient-to-br from-blue-50 to-blue-100'
+                        : 'bg-gradient-to-br from-yellow-50 to-yellow-100'
+                    }
+                  `}
+                >
+                  {/* Icon */}
+                  <div
+                    className={`p-3 rounded-full
+                      ${
+                        blog.color === 'red'
+                          ? 'bg-red-100 text-red-400'
+                          : blog.color === 'blue'
+                          ? 'bg-blue-100 text-blue-400'
+                          : 'bg-yellow-100 text-yellow-500'
+                      }
+                    `}
+                  >
+                    {blog.color === 'blue' ? (
+                      <BarChart2 size={28} />
+                    ) : blog.color === 'red' ? (
+                      <Landmark size={28} />
+                    ) : (
+                      <FileText size={28} />
+                    )}
+                  </div>
 
-          {/* 🔴 ARTICLE 1 */}
-          <article className="group rounded-2xl bg-white shadow-sm hover:shadow-xl transition duration-300 overflow-hidden">
+                  {/* Category badge */}
+                  <span
+                    className={`text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full
+                      ${
+                        blog.color === 'red'
+                          ? 'bg-red-100 text-red-600'
+                          : blog.color === 'blue'
+                          ? 'bg-blue-100 text-blue-600'
+                          : 'bg-yellow-100 text-yellow-700'
+                      }
+                    `}
+                  >
+                    {blog.color === 'blue' ? 'Finance' : blog.color === 'red' ? 'Banking' : 'Policy'}
+                  </span>
 
-            {/* Image */}
-            <div className="relative overflow-hidden">
-              <Image
-                src="/idbi-defaults.jpeg"
-                alt="IDBI Defaults"
-                width={1200}
-                height={600}
-                className="w-full h-[350px] object-cover group-hover:scale-105 transition duration-500"
-              />
-            </div>
+                  {/* Title preview */}
+                  <p className="text-center text-sm font-semibold text-gray-600 line-clamp-2 max-w-[260px] leading-snug">
+                    {blog.title}
+                  </p>
+                </div>
+              )}
 
-            <div className="p-8 space-y-6">
+              {/* CONTENT */}
+              <div className="p-6 flex flex-col flex-1 space-y-4">
+                <h2 className="text-xl font-bold line-clamp-2">
+                  {blog.title}
+                </h2>
 
-              <h2 className="text-2xl font-bold text-gray-900 group-hover:text-primary transition">
-                10 Wilful Defaults of ₹10,000 Crore that Impacted IDBI Bank
-              </h2>
+                {blog.description.map((para, i) => (
+                  <p key={i} className="text-gray-600 text-sm">
+                    {para}
+                  </p>
+                ))}
 
-              <p className="text-gray-600 leading-relaxed">
-                High-profile borrowers account for a significant portion of wilful defaults at IDBI Bank. The total amount of defaults exceeds government support, raising concerns about financial accountability.
-              </p>
-
-              <p className="text-gray-600 leading-relaxed">
-                With privatisation concerns rising, accountability of large defaulters becomes critical for maintaining public trust and financial discipline.
-              </p>
-
-              {/* Highlight Box */}
-              <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-md text-sm text-red-800">
-                With the privatisation of IDBI all those cronies who have looted hard earned savings may escape accountability. Citizens must raise their voice.
+                {/* Highlight */}
+                <div
+                  className={`p-3 text-sm rounded border-l-4 ${
+                    blog.color === 'red'
+                      ? 'bg-red-50 border-red-500 text-red-700'
+                      : blog.color === 'blue'
+                      ? 'bg-blue-50 border-blue-500 text-blue-700'
+                      : 'bg-yellow-50 border-yellow-500 text-yellow-700'
+                  }`}
+                >
+                  {blog.highlight}
+                </div>
               </div>
-
-              {/* CTA */}
-              <button className="flex items-center gap-2 text-primary font-medium hover:gap-3 transition">
-                Read More <ArrowRight size={16} />
-              </button>
-
-            </div>
-          </article>
-
-          {/* 🔵 ARTICLE 2 */}
-          <article className="group rounded-2xl bg-white shadow-sm hover:shadow-xl transition duration-300 overflow-hidden">
-
-            {/* Image */}
-            <div className="relative overflow-hidden">
-              <Image
-                src="/bse-market.jpeg"
-                alt="BSE Market"
-                width={1200}
-                height={600}
-                className="w-full h-[350px] object-cover group-hover:scale-105 transition duration-500"
-              />
-            </div>
-
-            <div className="p-8 space-y-6">
-
-              <h2 className="text-2xl font-bold text-gray-900 group-hover:text-primary transition">
-                BSE Market Decline & Global Financial Impact
-              </h2>
-
-              <p className="text-gray-600 leading-relaxed">
-                The BSE index has dropped nearly 5,000 points, wiping out approximately ₹30 lakh crore in market capitalisation due to global instability.
-              </p>
-
-              <p className="text-gray-600 leading-relaxed">
-                Geopolitical tensions and global economic shifts continue to influence financial markets, raising concerns for long-term stability.
-              </p>
-
-              {/* Highlight Box */}
-              <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-md text-sm text-blue-800">
-                Market capitalisation losses reflect global uncertainty. Strategic financial policy response is essential.
-              </div>
-
-              {/* CTA */}
-              <button className="flex items-center gap-2 text-primary font-medium hover:gap-3 transition">
-                Read More <ArrowRight size={16} />
-              </button>
-
-            </div>
-          </article>
-
+            </article>
+          ))}
         </section>
 
-        {/* 🔥 CTA SECTION (PREMIUM STRIPE STYLE) */}
-        <section className="px-6 pb-24">
-          <div className="mx-auto max-w-7xl bg-[#0a1a3a] text-white rounded-2xl p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
-
+        {/* CTA */}
+        <section className="px-6 pb-20">
+          <div className="max-w-7xl mx-auto bg-[#0a1a3a] text-white p-10 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-6">
             <div>
               <h2 className="text-2xl font-bold">
-                Stay Ahead with Financial Insights
+                Stay Ahead with Insights
               </h2>
-              <p className="text-gray-300 mt-2">
-                Get expert-driven analysis and updates from BETRA.
+              <p className="text-gray-300">
+                Get expert analysis from BETRA.
               </p>
             </div>
-
             <Link
               href="/membership"
-              className="bg-white text-black px-6 py-3 rounded-lg font-medium hover:bg-gray-200 transition text-center"
+              className="bg-white text-black px-5 py-2 rounded-lg hover:bg-gray-200 transition"
             >
-              Subscribe Now
+              Subscribe
             </Link>
-
           </div>
         </section>
-
       </main>
 
       <Footer />

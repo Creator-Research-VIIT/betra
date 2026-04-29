@@ -19,11 +19,11 @@ const slides = [
     image: "/banners/image_2.png",
     alt: "Vintage ledgers representing historical analysis",
   },
-  {
-    title: "Banking after Independence (1947–1969)",
-    image: "/banners/image_3.png",
-    alt: "Industrial growth in post-independence India",
-  },
+  // {
+  //   title: "Banking after Independence (1947–1969)",
+  //   image: "/banners/image_3.png",
+  //   alt: "Industrial growth in post-independence India",
+  // },
   {
     title: "Integration and Way Forward",
     image: "/banners/image_1.png",
@@ -77,7 +77,7 @@ export function BannerSlider() {
               key={index}
               className="pl-0 relative w-full h-[220px] sm:h-[300px] md:h-[400px] lg:h-[500px]"
             >
-              <div className="relative w-full h-full overflow-hidden">
+              <div className="relative w-full h-full overflow-hidden flex items-center justify-center bg-muted/20">
                 
                 {/* Image */}
                 <Image
@@ -85,7 +85,7 @@ export function BannerSlider() {
                   alt={slide.alt}
                   fill
                   sizes="100vw"
-                  className="object-cover"
+                  className="object-contain"
                   priority={index === 0}
                 />
 
@@ -95,9 +95,9 @@ export function BannerSlider() {
         </CarouselContent>
 
         {/* Navigation Arrows (hidden on mobile) */}
-        <CarouselPrevious className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black/40 hover:bg-black/60 text-white border-none" />
+        <CarouselPrevious className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 opacity-70 hover:opacity-100 transition-opacity bg-black/40 hover:bg-black/60 text-white border-none" />
 
-        <CarouselNext className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black/40 hover:bg-black/60 text-white border-none" />
+        <CarouselNext className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 opacity-70 hover:opacity-100 transition-opacity bg-black/40 hover:bg-black/60 text-white border-none" />
 
         {/* Pagination Dots */}
         <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-2">
