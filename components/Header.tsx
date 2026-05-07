@@ -56,7 +56,7 @@ export function Header() {
           {/* Logo + Text */}
             <Link href="/" className="flex items-center gap-3">
               <Image
-                src="/logo.jpeg"
+                src="/logo.png"
                 alt="BETRA Logo"
                 width={60}
                 height={60}
