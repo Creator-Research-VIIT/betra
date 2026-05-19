@@ -22,6 +22,27 @@ const images: GalleryImage[] = [
     alt: 'Financial Literacy Awareness Program 2',
     caption: 'Community Outreach Initiative',
   },
+  {
+    src: '/gallery-3.jpg',
+    alt: 'बँक नोकर भरती कार्यशाळा उत्साहात संपन्न !',
+    caption: 'बँक नोकर भरती कार्यशाळा उत्साहात संपन्न !',
+  },
+  {
+    src: '/gallery-4.jpg',
+    alt: 'बँक नोकर भरती कार्यशाळा उत्साहात संपन्न !',
+    caption: 'बँक नोकर भरती कार्यशाळा उत्साहात संपन्न !',
+  },
+  {
+    src: '/gallery-5.jpg',
+    alt: 'बँक नोकर भरती कार्यशाळा उत्साहात संपन्न !',
+    caption: 'बँक नोकर भरती कार्यशाळा उत्साहात संपन्न !',
+  },
+  {
+    src: '/gallery-6.jpg',
+    alt: 'बँक नोकर भरती कार्यशाळा उत्साहात संपन्न !',
+    caption: 'बँक नोकर भरती कार्यशाळा उत्साहात संपन्न !',
+  },
+
 ]
 
 export default function Gallery() {

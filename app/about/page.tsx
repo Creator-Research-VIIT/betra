@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 
 import { Footer } from '@/components/Footer'
 import { Card, CardContent } from '@/components/ui/card'
-import { Shield, Users, GraduationCap, Landmark, Briefcase, User } from 'lucide-react'
+import { Shield, Users, GraduationCap, Landmark, Briefcase, User, Sparkles } from 'lucide-react'
 // import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
@@ -28,6 +28,7 @@ export default function About() {
             </div> 
 
             <div className="bg-[#0a1a3a] relative mx-auto max-w-7xl px-6 py-25"> 
+              {/* <Sparkles size={14} className="text-amber-300 animate-pulse" /> */}
               <span className="text-xs tracking-widest uppercase bg-white/10 px-3 py-1 rounded-full backdrop-blur">
                 Editorial Precision in Banking
               </span> 

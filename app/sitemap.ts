@@ -37,7 +37,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${baseUrl}/gallery`,
       lastModified: new Date(),
-      changeFrequency: 'bi-weekly',
+      changeFrequency: 'weekly',
       priority: 0.7,
     },
     {

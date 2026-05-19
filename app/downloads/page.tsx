@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react'
 import { Footer } from '@/components/Footer'
 import { Button } from '@/components/ui/button'
+import { DownloadSection } from '@/components/DownloadSection'
 
 import {
   Download,
@@ -11,6 +12,9 @@ import {
   Building2,
   Search,
   FileText,
+  BookOpen,
+  Sparkles,
+  Info
 } from 'lucide-react'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -73,20 +77,25 @@ const CATEGORIES = ['All', 'Fraud', 'Banking', 'Digital', 'Payments', 'Literacy'
 type CategoryFilter = (typeof CATEGORIES)[number]
 
 const categoryColors: Record<string, string> = {
-  Fraud:    'bg-red-100 text-red-700',
-  Banking:  'bg-blue-100 text-blue-700',
-  Digital:  'bg-purple-100 text-purple-700',
-  Payments: 'bg-green-100 text-green-700',
-  Literacy: 'bg-yellow-100 text-yellow-700',
+  Fraud:    'bg-red-100 text-red-700 border-red-200/50',
+  Banking:  'bg-blue-100 text-blue-700 border-blue-200/50',
+  Digital:  'bg-purple-100 text-purple-700 border-purple-200/50',
+  Payments: 'bg-green-100 text-green-700 border-green-200/50',
+  Literacy: 'bg-yellow-100 text-yellow-700 border-yellow-200/50',
 }
+
+type TabType = 'study' | 'awareness' | 'links'
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function Downloads() {
+  const [activeTab, setActiveTab] = useState<TabType>('study')
+
+  // Search & category filters for existing RBI Awareness topics
   const [search, setSearch] = useState('')
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>('All')
 
-  const filtered = useMemo(() => {
+  const filteredAwarenessItems = useMemo(() => {
     return awarenessItems.filter((item) => {
       const matchesSearch = item.title.toLowerCase().includes(search.toLowerCase())
       const matchesCategory = activeCategory === 'All' || item.category === activeCategory
@@ -114,204 +123,288 @@ export default function Downloads() {
 
   return (
     <>
-      <main>
+      <main className="bg-gray-50/50 min-h-screen">
 
         {/* HERO */}
-        <section className="bg-[#0a1a3a] text-white">
-          <div className="mx-auto max-w-7xl px-6 py-28">
-            <span className="text-xs uppercase tracking-widest bg-white/10 px-4 py-1 rounded-full backdrop-blur mb-8">
-              Resource Center
+        <section className="bg-[#0a1a3a] text-white relative overflow-hidden">
+          {/* Subtle gradient background mesh */}
+          <div className="absolute inset-0 bg-radial-at-t from-[#152e60] via-transparent to-transparent opacity-40 pointer-events-none" />
+          
+          <div className="mx-auto max-w-7xl px-6 py-28 relative z-10 space-y-4">
+            <span className="inline-flex items-center gap-1.5 text-xs uppercase tracking-widest bg-white/10 px-4 py-1.5 rounded-full backdrop-blur-md font-semibold text-blue-200">
+              <Sparkles size={12} className="text-amber-300 animate-pulse" />
+              Resource Hub
             </span>
-            <h1 className="text-5xl font-bold mt-4 mb-6">
+            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mt-4">
               Resource Library
             </h1>
-            <p className="max-w-xl text-gray-300 text-lg">
-              Access professionally curated financial literacy materials for individuals, institutions, and entrepreneurs.
+            <p className="max-w-2xl text-gray-300 text-base md:text-lg leading-relaxed font-light">
+              Gain access to high-fidelity PDF guides, recruitment trends, banking pattern syllabus resources, and curated RBI awareness files.
             </p>
           </div>
         </section>
 
-        {/* FINANCIAL AWARENESS TOPICS */}
-        <section className="bg-white py-20 border-t">
+        {/* TABS SWITCHER NAVIGATION BAR */}
+        <section className="stickey top-24 z-40 bg-white border-b border-gray-200 shadow-xs">
           <div className="mx-auto max-w-7xl px-6">
+            <div className="flex overflow-x-auto scrollbar-none gap-6 md:gap-8 -mb-px">
+              
+              {/* Tab 1: Study & Career Materials */}
+              <button
+                onClick={() => setActiveTab('study')}
+                className={`flex items-center gap-2 py-5 border-b-2 font-semibold text-sm transition-all whitespace-nowrap outline-none ${
+                  activeTab === 'study'
+                    ? 'border-[#0a1a3a] text-[#0a1a3a]'
+                    : 'border-transparent text-gray-500 hover:text-gray-900 hover:border-gray-300'
+                }`}
+              >
+                <BookOpen size={16} />
+                Study & Career Guides
+                <span className="bg-blue-50 text-blue-800 text-[10px] px-2 py-0.5 rounded-full font-bold ml-1 border border-blue-100">
+                  New
+                </span>
+              </button>
 
-            {/* Section header */}
-            <div className="mb-10">
-              <h2 className="text-2xl font-bold text-gray-900">
-                Financial Awareness Topics
-              </h2>
-              <p className="text-gray-500 text-sm mt-2">
-                RBI-aligned awareness materials on banking safety, digital payments, and fraud prevention.
-              </p>
+              {/* Tab 2: RBI Awareness Library */}
+              <button
+                onClick={() => setActiveTab('awareness')}
+                className={`flex items-center gap-2 py-5 border-b-2 font-semibold text-sm transition-all whitespace-nowrap outline-none ${
+                  activeTab === 'awareness'
+                    ? 'border-[#0a1a3a] text-[#0a1a3a]'
+                    : 'border-transparent text-gray-500 hover:text-gray-900 hover:border-gray-300'
+                }`}
+              >
+                <FileText size={16} />
+                RBI Awareness Topics
+                <span className="bg-gray-100 text-gray-600 text-[10px] px-2 py-0.5 rounded-full font-bold ml-1">
+                  {awarenessItems.length}
+                </span>
+              </button>
+
+              {/* Tab 3: Official Banking Links */}
+              <button
+                onClick={() => setActiveTab('links')}
+                className={`flex items-center gap-2 py-5 border-b-2 font-semibold text-sm transition-all whitespace-nowrap outline-none ${
+                  activeTab === 'links'
+                    ? 'border-[#0a1a3a] text-[#0a1a3a]'
+                    : 'border-transparent text-gray-500 hover:text-gray-900 hover:border-gray-300'
+                }`}
+              >
+                <Landmark size={16} />
+                Official Banking Links
+              </button>
+
             </div>
+          </div>
+        </section>
 
-            {/* Search + Filter bar */}
-            <div className="flex flex-col sm:flex-row gap-4 mb-8">
-              {/* Search */}
-              <div className="relative flex-1">
-                <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-                <input
-                  type="text"
-                  placeholder="Search topics..."
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  className="w-full pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0a1a3a]/30"
-                />
-              </div>
-
-              {/* Category pills */}
-              <div className="flex flex-wrap gap-2">
-                {CATEGORIES.map((cat) => (
-                  <button
-                    key={cat}
-                    onClick={() => setActiveCategory(cat)}
-                    className={`px-3 py-1.5 rounded-full text-xs font-semibold transition ${
-                      activeCategory === cat
-                        ? 'bg-[#0a1a3a] text-white'
-                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Results count */}
-            <p className="text-xs text-gray-400 mb-6">
-              Showing {filtered.length} of {awarenessItems.length} topics
-            </p>
-
-            {/* Grid */}
-            {filtered.length > 0 ? (
-              <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                {filtered.map((item) => (
-                  <div
-                    key={item.title}
-                    className="bg-gray-50 rounded-xl p-4 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition flex flex-col gap-3"
-                  >
-                    {/* Top row: icon + category badge */}
-                    <div className="flex items-center justify-between">
-                      <div className="bg-[#0a1a3a]/10 p-2 rounded-lg">
-                        <FileText size={18} className="text-[#0a1a3a]" />
-                      </div>
-                      <span className={`text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full ${categoryColors[item.category]}`}>
-                        {item.category}
-                      </span>
-                    </div>
-
-                    {/* Title */}
-                    <p className="text-sm font-semibold text-gray-800 leading-snug flex-1">
-                      {item.title}
-                    </p>
-
-                    {/* Download button */}
-                    <a
-                      href={item.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 bg-[#0a1a3a] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#08122c] transition"
-                    >
-                      <Download size={14} />
-                      Download PDF
-                    </a>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-20 text-gray-400">
-                <Search size={32} className="mx-auto mb-3 opacity-40" />
-                <p className="text-sm">No topics match your search.</p>
+        {/* ACTIVE TAB CONTENT */}
+        <section className="py-12">
+          <div className="mx-auto max-w-7xl px-6">
+            
+            {activeTab === 'study' && (
+              /* TAB 1: STUDY & CAREER GUIDES */
+              <div className="animate-fadeIn duration-300">
+                <DownloadSection />
               </div>
             )}
-          </div>
-        </section>
 
-        {/* USEFUL LINKS */}
-        <section className="bg-gray-50 py-20 border-t">
-          <div className="mx-auto max-w-7xl px-6">
+            {activeTab === 'awareness' && (
+              /* TAB 2: RBI AWARENESS TOPICS (PREVIOUS MAIN DIRECTORY) */
+              <div className="space-y-8 animate-fadeIn duration-300">
+                
+                {/* Section Info Header */}
+                <div className="bg-blue-50/40 p-4 rounded-xl border border-blue-100/50 flex gap-3 items-start">
+                  <Info size={18} className="text-blue-600 shrink-0 mt-0.5" />
+                  <p className="text-xs text-gray-600 leading-relaxed">
+                    Access complete, RBI-aligned official financial safety directories. You can search, filter, and view the latest educational campaigns regarding digital lending safety, fraud reports, and card tokenization protocols.
+                  </p>
+                </div>
 
-            <div className="mb-12">
-              <h2 className="text-2xl font-bold text-gray-900">
-                Useful Links
-              </h2>
-              <p className="text-gray-500 text-sm mt-2">
-                Access official banking institutions and regulatory bodies.
-              </p>
-            </div>
+                {/* Search + Filter bar */}
+                <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-xs flex flex-col md:flex-row gap-4">
+                  {/* Search */}
+                  <div className="relative flex-1">
+                    <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                    <input
+                      type="text"
+                      placeholder="Search RBI awareness topics..."
+                      value={search}
+                      onChange={(e) => setSearch(e.target.value)}
+                      className="w-full pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0a1a3a]/30"
+                    />
+                  </div>
 
-            <div className="grid md:grid-cols-2 gap-10">
-
-              {/* Regulatory */}
-              <div>
-                <h3 className="text-lg font-semibold mb-6 flex items-center gap-2">
-                  <Landmark size={18} />
-                  Regulatory Bodies
-                </h3>
-                <ul className="space-y-4">
-                  {usefulLinks.regulatory.map((link) => (
-                    <li key={link.name}>
-                      <a
-                        href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`Visit ${link.name}`}
-                        className="flex items-center justify-between p-4 bg-white rounded-lg hover:shadow-md transition hover:-translate-y-1"
+                  {/* Category pills */}
+                  <div className="flex flex-wrap gap-1.5 items-center">
+                    {CATEGORIES.map((cat) => (
+                      <button
+                        key={cat}
+                        onClick={() => setActiveCategory(cat)}
+                        className={`px-3 py-1.5 rounded-full text-xs font-semibold transition ${
+                          activeCategory === cat
+                            ? 'bg-[#0a1a3a] text-white shadow-2xs'
+                            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                        }`}
                       >
-                        <span className="text-sm font-medium text-gray-800">
-                          {link.name}
-                        </span>
-                        <ExternalLink size={16} />
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                        {cat}
+                      </button>
+                    ))}
+                  </div>
+                </div>
 
-              {/* Banks */}
-              <div>
-                <h3 className="text-lg font-semibold mb-6 flex items-center gap-2">
-                  <Building2 size={18} />
-                  Major Banks
-                </h3>
-                <ul className="space-y-4">
-                  {usefulLinks.banks.map((link) => (
-                    <li key={link.name}>
-                      <a
-                        href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`Visit ${link.name}`}
-                        className="flex items-center justify-between p-4 bg-white rounded-lg hover:shadow-md transition hover:-translate-y-1"
+                {/* Results count */}
+                <div className="flex items-center justify-between">
+                  <p className="text-xs text-gray-400 font-medium">
+                    Showing {filteredAwarenessItems.length} of {awarenessItems.length} awareness topics
+                  </p>
+                  
+                  {search || activeCategory !== 'All' ? (
+                    <button
+                      onClick={() => {
+                        setSearch('')
+                        setActiveCategory('All')
+                      }}
+                      className="text-xs text-blue-700 font-semibold hover:underline"
+                    >
+                      Reset Filters
+                    </button>
+                  ) : null}
+                </div>
+
+                {/* Grid */}
+                {filteredAwarenessItems.length > 0 ? (
+                  <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                    {filteredAwarenessItems.map((item) => (
+                      <div
+                        key={item.title}
+                        className="bg-white border border-gray-200 rounded-xl p-5 shadow-xs hover:shadow-md hover:-translate-y-0.5 transition-all flex flex-col gap-4 group"
                       >
-                        <span className="text-sm font-medium text-gray-800">
-                          {link.name}
-                        </span>
-                        <ExternalLink size={16} />
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                        {/* Top row: icon + category badge */}
+                        <div className="flex items-center justify-between">
+                          <div className="bg-[#0a1a3a]/10 p-2.5 rounded-lg text-[#0a1a3a]">
+                            <FileText size={18} />
+                          </div>
+                          <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border ${categoryColors[item.category]}`}>
+                            {item.category}
+                          </span>
+                        </div>
 
-            </div>
+                        {/* Title */}
+                        <p className="text-sm font-semibold text-gray-800 leading-snug flex-1 group-hover:text-blue-800 transition-colors duration-150">
+                          {item.title}
+                        </p>
+
+                        {/* Link to external site */}
+                        <a
+                          href={item.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center gap-2 bg-[#0a1a3a] text-white px-4 py-2.5 rounded-lg text-xs font-bold hover:bg-[#08122c] transition-all hover:scale-[1.02]"
+                        >
+                          <ExternalLink size={13} />
+                          Visit website
+                        </a>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-20 bg-white border border-gray-200 rounded-xl text-gray-400">
+                    <Search size={32} className="mx-auto mb-3 opacity-40" />
+                    <p className="text-sm font-medium">No awareness topics found matching your query.</p>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {activeTab === 'links' && (
+              /* TAB 3: USEFUL LINKS (PREVIOUS BOTTOM DIRECTORY) */
+              <div className="grid md:grid-cols-2 gap-8 md:gap-12 animate-fadeIn duration-300">
+
+                {/* Regulatory */}
+                <div className="space-y-6">
+                  <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2 border-b pb-3">
+                    <div className="p-1.5 bg-blue-50 text-blue-800 rounded-lg">
+                      <Landmark size={18} />
+                    </div>
+                    Regulatory Bodies
+                  </h3>
+                  <ul className="space-y-3.5">
+                    {usefulLinks.regulatory.map((link) => (
+                      <li key={link.name}>
+                        <a
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`Visit ${link.name}`}
+                          className="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-xl hover:shadow-md hover:border-blue-200 transition-all hover:-translate-y-0.5 group"
+                        >
+                          <span className="text-xs md:text-sm font-semibold text-gray-800 group-hover:text-blue-800 transition-colors">
+                            {link.name}
+                          </span>
+                          <ExternalLink size={14} className="text-gray-400 group-hover:text-blue-700 transition-colors" />
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Banks */}
+                <div className="space-y-6">
+                  <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2 border-b pb-3">
+                    <div className="p-1.5 bg-purple-50 text-purple-800 rounded-lg">
+                      <Building2 size={18} />
+                    </div>
+                    Major Commercial Banks
+                  </h3>
+                  <ul className="space-y-3.5">
+                    {usefulLinks.banks.map((link) => (
+                      <li key={link.name}>
+                        <a
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`Visit ${link.name}`}
+                          className="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-xl hover:shadow-md hover:border-blue-200 transition-all hover:-translate-y-0.5 group"
+                        >
+                          <span className="text-xs md:text-sm font-semibold text-gray-800 group-hover:text-blue-800 transition-colors">
+                            {link.name}
+                          </span>
+                          <ExternalLink size={14} className="text-gray-400 group-hover:text-blue-700 transition-colors" />
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+              </div>
+            )}
+
           </div>
         </section>
 
         {/* CTA */}
         <section className="px-6 pb-24">
-          <div className="mx-auto max-w-7xl bg-[#0a1a3a] text-white rounded-2xl p-10 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-              <h2 className="text-2xl font-bold">
+          <div className="mx-auto max-w-7xl bg-[#0a1a3a] text-white rounded-2xl p-10 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden shadow-xl">
+            {/* Background design accents */}
+            <div className="absolute right-0 top-0 w-64 h-64 bg-white/[0.03] rounded-full -mr-20 -mt-20 pointer-events-none" />
+            <div className="absolute left-0 bottom-0 w-48 h-48 bg-white/[0.01] rounded-full -ml-16 -mb-16 pointer-events-none" />
+            
+            <div className="space-y-2 relative z-10 text-center md:text-left">
+              <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight">
                 Need More Resources?
               </h2>
-              <p className="text-gray-300 mt-2">
-                Our team can provide customized training materials.
+              <p className="text-gray-300 text-sm max-w-xl leading-relaxed">
+                Our educational advisory board at BETRA can curate specialized JAIIB, CAIIB, or banking exam study guides tailored to your institute's cohorts.
               </p>
             </div>
-            <Button className="bg-white text-black hover:bg-gray-200">
+            
+            <a 
+              href="/contact"
+              className="inline-flex items-center justify-center bg-white text-black hover:bg-gray-100 font-bold px-6 py-3.5 rounded-xl text-xs md:text-sm transition-all hover:scale-105 active:scale-95 shadow-md shrink-0 relative z-10"
+            >
               Contact Us
-            </Button>
+            </a>
           </div>
         </section>
 
