@@ -13,34 +13,64 @@ type GalleryImage = {
 
 const images: GalleryImage[] = [
   {
-    src: '/gallery-1.jpeg',
+    src: '/gallery/gallery-1.jpeg',
     alt: 'Financial Literacy Awareness Program 1',
     caption: 'Financial Literacy Awareness Program',
   },
   {
-    src: '/gallery-2.jpeg',
+    src: '/gallery/gallery-2.jpeg',
     alt: 'Financial Literacy Awareness Program 2',
     caption: 'Community Outreach Initiative',
   },
   {
-    src: '/gallery-3.jpg',
+    src: '/gallery/gallery-3.jpg',
     alt: 'बँक नोकर भरती कार्यशाळा उत्साहात संपन्न !',
     caption: 'बँक नोकर भरती कार्यशाळा उत्साहात संपन्न !',
   },
   {
-    src: '/gallery-4.jpg',
+    src: '/gallery/gallery-4.jpg',
     alt: 'बँक नोकर भरती कार्यशाळा उत्साहात संपन्न !',
     caption: 'बँक नोकर भरती कार्यशाळा उत्साहात संपन्न !',
   },
   {
-    src: '/gallery-5.jpg',
+    src: '/gallery/gallery-5.jpg',
     alt: 'बँक नोकर भरती कार्यशाळा उत्साहात संपन्न !',
     caption: 'बँक नोकर भरती कार्यशाळा उत्साहात संपन्न !',
   },
   {
-    src: '/gallery-6.jpg',
+    src: '/gallery/gallery-6.jpg',
     alt: 'बँक नोकर भरती कार्यशाळा उत्साहात संपन्न !',
     caption: 'बँक नोकर भरती कार्यशाळा उत्साहात संपन्न !',
+  },
+  {
+    src: '/gallery/gallery-7.jpeg',
+    alt: 'बँक नोकर भरती कार्यशाळा उत्साहात संपन्न !',
+    caption: 'Indias Outward Remittances Slip in FY 2026 : RBI Data',
+  },
+  {
+    src: '/gallery/gallery-8.jpeg',
+    alt: 'बँक नोकर भरती कार्यशाळा उत्साहात संपन्न !',
+    caption: 'Top 10 States with Highest Loan Delinguencies',
+  },
+  {
+    src: '/gallery/gallery-9.jpeg',
+    alt: 'बँक नोकर भरती कार्यशाळा उत्साहात संपन्न !',
+    caption: '12 Major Public Sector Banks Today',
+  },
+  {
+    src: '/gallery/gallery-10.jpeg',
+    alt: 'बँक नोकर भरती कार्यशाळा उत्साहात संपन्न !',
+    caption: 'Public Sector Banks - Net Profit Trends',
+  },
+  {
+    src: '/gallery/gallery-11.jpeg',
+    alt: 'बँक नोकर भरती कार्यशाळा उत्साहात संपन्न !',
+    caption: 'RBI Divided the payout to government over the years',
+  },
+  {
+    src: '/gallery/gallery-12.png',
+    alt: 'बँक नोकर भरती कार्यशाळा उत्साहात संपन्न !',
+    caption: 'FY 26 Consolidated Net Profit Leaders',
   },
 
 ]
