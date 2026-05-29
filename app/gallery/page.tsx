@@ -103,24 +103,24 @@ const galleryItems: GalleryItem[] = [
     caption: 'Movement of Non performing Assets',
   },
 
-  // EMBEDDED YOUTUBE VIDEO
-  {
-    type: 'youtube',
-    src: 'https://www.youtube.com/embed/t5GQd-3h8oY',
-    thumbnail: 'https://img.youtube.com/vi/t5GQd-3h8oY/hqdefault.jpg',
-    alt: 'BANK आणि BANKING म्हणजे काय?',
-    caption:
-      'BANK आणि BANKING म्हणजे काय? नेमका अर्थ समजून घ्या',
-  },
+  // // EMBEDDED YOUTUBE VIDEO
+  // {
+  //   type: 'youtube',
+  //   src: 'https://www.youtube.com/embed/t5GQd-3h8oY',
+  //   thumbnail: 'https://img.youtube.com/vi/t5GQd-3h8oY/hqdefault.jpg',
+  //   alt: 'BANK आणि BANKING म्हणजे काय?',
+  //   caption:
+  //     'BANK आणि BANKING म्हणजे काय? नेमका अर्थ समजून घ्या',
+  // },
 
-  // YOUTUBE CHANNEL LINK
-  {
-    type: 'youtube-link',
-    src: 'https://youtube.com/@paryayabettertomorrow',
-    thumbnail: '/gallery/gallery-14.png',
-    alt: 'पर्याय YouTube Channel',
-    caption: 'पर्याय YouTube Channel',
-  },
+  // // YOUTUBE CHANNEL LINK
+  // {
+  //   type: 'youtube-link',
+  //   src: 'https://youtube.com/@paryayabettertomorrow',
+  //   thumbnail: '/gallery/gallery-14.png',
+  //   alt: 'पर्याय YouTube Channel',
+  //   caption: 'पर्याय YouTube Channel',
+  // },
 ]
 
 export default function Gallery() {

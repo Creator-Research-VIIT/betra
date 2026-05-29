@@ -13,6 +13,7 @@ const navigation = [
   // { name: 'Core Activities', href: '/activities' },
   { name: 'Downloads', href: '/downloads' },
   { name: 'Gallery', href: '/gallery' },
+  { name: 'Videos', href: '/videos' },
   { name: 'Blog', href: '/blog' },
   { name: 'Bank Clinic', href: '/membership' },
   { name: 'Contact Us', href: '/contact' },
