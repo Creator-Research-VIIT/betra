@@ -23,7 +23,15 @@ const videos: VideoItem[] = [
     description:
       'BANK आणि BANKING म्हणजे काय? सोप्या आणि साध्या शब्दात समजून घ्या.',
   },
-
+  {
+    type: 'youtube',
+    src: 'https://www.youtube.com/embed/lhx7UZRcAXc',
+    thumbnail:
+      'https://img.youtube.com/vi/lhx7UZRcAXc/hqdefault.jpg',
+    title: 'नवीन आर्थिक साक्षरता व्हिडिओ',
+    description:
+      'Financial awareness and educational video from Paryaya.',
+  },
   {
     type: 'youtube-link',
     src: 'https://youtube.com/@paryayabettertomorrow',
@@ -32,6 +40,7 @@ const videos: VideoItem[] = [
     description:
       'Financial awareness, banking education, and research videos.',
   },
+  
 ]
 
 export default function VideoSection() {
