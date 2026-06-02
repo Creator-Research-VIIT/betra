@@ -219,6 +219,38 @@ export const blogs: Blog[] = [
     </p>
   `,
 },
+{
+  id: '8',
+  title: 'Write-Off of Bank Dues: Who Really Bears the Burden?',
+  description: [
+    'बँक कर्जांच्या राइट-ऑफ प्रक्रियेबाबत सामान्य नागरिकांमध्ये असलेल्या गैरसमजांचे विश्लेषण.',
+    'मोठ्या उद्योगांना, कॉर्पोरेट कर्जदारांना आणि सामान्य ठेवीदारांना याचा नेमका काय परिणाम होतो यावर सविस्तर चर्चा.'
+  ],
+  highlight:
+    '“राइट-ऑफ म्हणजे कर्जमाफी नव्हे; पण त्याचा लाभ नेमका कोणाला होतो हा प्रश्न अद्याप अनुत्तरित आहे.”',
+
+  image: '/writeoff.png', // Optional: add image in public folder
+
+  color: 'red',
+
+  excerpt:
+  'Corporate write-offs constitute one of the biggest forms of systemic wealth transfer in modern India. In the name of financial stability, public wealth is quietly being redistributed upward.',
+
+  author: 'देविदास तुळजापूरकर',
+  category: 'Banking Policy',
+  date: '02 June 2026',
+
+  content: `
+    <p>मूळ लेख वाचण्यासाठी
+      <a href="https://open.substack.com/pub/devidastuljapurkar/p/write-off-of-bank-dues-who-really?r=8ut0k&utm_campaign=post&utm_medium=web&showWelcomeOnShare=true"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="text-blue-600 hover:underline">
+         येथे क्लिक करा
+      </a>.
+    </p>
+  `,
+},
 ]
 
 export function getBlogById(id: string): Blog | undefined {

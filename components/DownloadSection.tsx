@@ -79,6 +79,30 @@ const pdfFiles: PDFResource[] = [
     type: 'PDF',
     downloads: 1538,
   },
+  {
+  id: 'rajya-sabha-npa-writeoff',
+  title: 'Rajya Sabha Question No. 392 – Category-wise Written-off Loans',
+  description:
+    'Category-wise details of written-off loans by Scheduled Commercial Banks from FY 2014-15 to Sep-2025, including Large Industries, Large Services, Agriculture & Allied Activities, Gross NPA and Net NPA data.',
+  file: '/pdfs/rajya-sabha-page.pdf',
+  size: '250 KB',
+  category: 'Recruitment Analysis',
+  uploadedAt: 'Feb 2026',
+  type: 'PDF',
+  downloads: 0,
+},
+{
+  id: 'lok-sabha-psb-writeoff',
+  title: 'Lok Sabha Question No. 2379 – Loans Written-off by PSBs',
+  description:
+    'Bank-wise and category-wise NPAs written off by Public Sector Banks for FY 2020-21 to FY 2024-25, covering Agriculture, Industry, Services and Retail Loan segments.',
+  file: '/pdfs/lok-sabha-page.pdf',
+  size: '230 KB',
+  category: 'Recruitment Analysis',
+  uploadedAt: 'Feb 2026',
+  type: 'PDF',
+  downloads: 0,
+},
 ]
 
 const CATEGORIES = ['All', 'Recruitment Analysis', 'Career Guides', 'Exam Patterns'] as const
