@@ -98,29 +98,23 @@ const galleryItems: GalleryItem[] = [
 },
 {
     type: 'image',
-    src: '/gallery/gallery-13.jpg',
-    alt: 'Movement of Non performing Assets',
-    caption: 'Movement of Non performing Assets',
+    src: '/gallery/gallery-15.jpeg',
+    alt: 'Rajya Sabha Unstarred question no. 392, Dated 3rd Feb 2026 Catgory-wise details of written-off loans by Scheduled Commercial Banks.',
+    caption: 'Rajya Sabha Unstarred question no. 392, Dated 3rd Feb 2026 Catgory-wise details of written-off loans by Scheduled Commercial Banks.',
   },
-
-  // // EMBEDDED YOUTUBE VIDEO
-  // {
-  //   type: 'youtube',
-  //   src: 'https://www.youtube.com/embed/t5GQd-3h8oY',
-  //   thumbnail: 'https://img.youtube.com/vi/t5GQd-3h8oY/hqdefault.jpg',
-  //   alt: 'BANK आणि BANKING म्हणजे काय?',
-  //   caption:
-  //     'BANK आणि BANKING म्हणजे काय? नेमका अर्थ समजून घ्या',
-  // },
-
-  // // YOUTUBE CHANNEL LINK
-  // {
-  //   type: 'youtube-link',
-  //   src: 'https://youtube.com/@paryayabettertomorrow',
-  //   thumbnail: '/gallery/gallery-14.png',
-  //   alt: 'पर्याय YouTube Channel',
-  //   caption: 'पर्याय YouTube Channel',
-  // },
+{
+    type: 'image',
+    src: '/gallery/gallery-16.jpeg',
+    alt: 'Lok Sabha Unstarred question no. 2379, regarding Loans Written-off by PSBs.Bank-wise, Category-wise NPAs written-off by PSBs for FY 2020-21 to FY 2024-2025.',
+    caption: 'Lok Sabha Unstarred question no. 2379, regarding Loans Written-off by PSBs.Bank-wise, Category-wise NPAs written-off by PSBs for FY 2020-21 to FY 2024-2025.',
+  },
+  {
+    type: 'image',
+    src: '/gallery/gallery-17.jpeg',
+    alt: 'A decade of the Insolvency & Bankruptcy Code raises a fundamental question: Why are concessions on lakh-crore corporate debts celebrated as reforms while relief to small borrowers is often criticized?',
+    caption: "शेतकऱ्यांच्या काही हजार कोटी रुपयांच्या कर्जमाफीवर आर्थिक शिस्तीचे धडे दिले जातात; पण मोठ्या उद्योगसमूहांच्या लाखो कोटी रुपयांच्या कर्जांवरील प्रचंड सवलतींना आर्थिक सुधारणा म्हटले जाते. या दुहेरी निकषांचा जाब देशातील नागरिक विचारत आहेत.",
+  },
+  
 ]
 
 export default function Gallery() {
