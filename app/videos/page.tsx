@@ -33,6 +33,15 @@ const videos: VideoItem[] = [
       'Financial awareness and educational video from Paryaya.',
   },
   {
+    type: 'youtube',
+    src: 'https://youtu.be/y2Q5jlQMYvU?si=iJ3hAnwoebMc9Q7H',
+    thumbnail:
+      'https://img.youtube.com/vi/y2Q5jlQMYvU/maxresdefault.jpg',
+    title: 'नवीन आर्थिक साक्षरता व्हिडिओ',
+    description:
+      'Financial awareness and educational video from Paryaya.',
+  },
+  {
     type: 'youtube-link',
     src: 'https://youtube.com/@paryayabettertomorrow',
     thumbnail: '/gallery/gallery-14.png',

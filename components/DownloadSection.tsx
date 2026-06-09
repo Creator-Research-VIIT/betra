@@ -26,15 +26,86 @@ export interface PDFResource {
   description: string
   file: string
   size: string
-  category: 'Recruitment Analysis' | 'Career Guides' | 'Exam Patterns'
+  category:
+  | 'Recruitment Analysis'
+  | 'Career Guides'
+  | 'Exam Patterns'
+  | 'Consumer Awareness'
+  | 'Fraud Prevention'
+  | 'Digital Payments'
+  | 'Ombudsman'
   uploadedAt: string
-  type: 'PDF'
+  type: 'PDF' | 'DOCX' | 'PPT' | 'PPTX'
   downloads: number
 }
 
 // ─── Study Materials Data ──────────────────────────────────────────────────────
 
 const pdfFiles: PDFResource[] = [
+  {
+  id: 'complaint-form-english',
+  title: 'RBI Ombudsman Complaint Form',
+  description:
+    'Official complaint form for filing grievances under the RBI Integrated Ombudsman Scheme.',
+  file: '/pdfs/ComplaintForm_English.pdf',
+  size: '230 KB',
+  category: 'Ombudsman',
+  uploadedAt: 'Jun 2026',
+  type: 'PDF',
+  downloads: 0,
+},
+
+{
+  id: 'customer-care-emails',
+  title: 'Customer Care Email Directory',
+  description:
+    'Customer grievance and complaint email addresses of major public and private sector banks in India.',
+  file: '/pdfs/CUSTOMER_CARE_EMAIL_ADDRESSES.docx',
+  size: '50 KB',
+  category: 'Consumer Awareness',
+  uploadedAt: 'Jun 2026',
+  type: 'PDF',
+  downloads: 0,
+},
+
+{
+  id: 'financial-fraud-brochure',
+  title: 'FinancialFraud Awareness Guide',
+  description:
+    'Comprehensive cyber fraud prevention guide covering OTP fraud, phishing attacks, online banking safety and digital transaction security.',
+  file: '/pdfs/Financial_Fraud_Brochures_final_01.pdf',
+  size: '4 MB',
+  category: 'Fraud Prevention',
+  uploadedAt: 'Jun 2026',
+  type: 'PDF',
+  downloads: 0,
+},
+
+{
+  id: 'npci-booklet',
+  title: 'NPCI Digital Payments Handbook',
+  description:
+    'Guide covering UPI, RuPay, IMPS, BHIM, AEPS, NACH, National Financial Switch and other NPCI payment systems.',
+  file: '/pdfs/NPCI_Booklet.pdf',
+  size: '6 MB',
+  category: 'Digital Payments',
+  uploadedAt: 'Jun 2026',
+  type: 'PDF',
+  downloads: 0,
+},
+
+{
+  id: 'ombudsman-faq',
+  title: 'RBI Integrated Ombudsman FAQs',
+  description:
+    'Frequently asked questions on RBI Integrated Ombudsman Scheme 2021, complaint filing process, eligibility and grievance redressal.',
+  file: '/pdfs/FAQ_OMBUDSMAN.docx',
+  size: '120 KB',
+  category: 'Ombudsman',
+  uploadedAt: 'Jun 2026',
+  type: 'PDF',
+  downloads: 0,
+},
   {
     id: 'banking-recruitment',
     title: 'Banking Recruitment Last 5 Years India',
@@ -105,7 +176,16 @@ const pdfFiles: PDFResource[] = [
 },
 ]
 
-const CATEGORIES = ['All', 'Recruitment Analysis', 'Career Guides', 'Exam Patterns'] as const
+const CATEGORIES = [
+  'All',
+  'Recruitment Analysis',
+  'Career Guides',
+  'Exam Patterns',
+  'Consumer Awareness',
+  'Fraud Prevention',
+  'Digital Payments',
+  'Ombudsman',
+] as const 
 type CategoryFilter = (typeof CATEGORIES)[number]
 
 export function DownloadSection() {
