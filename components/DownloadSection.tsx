@@ -174,6 +174,18 @@ const pdfFiles: PDFResource[] = [
   type: 'PDF',
   downloads: 0,
 },
+{
+  id: 'banking-statistics-2022-2026',
+  title: 'Banking Statistics 2022–2026',
+  description:
+    'Comprehensive banking statistics covering Deposits, Advances, Total Business, CASA, Gross & Net NPA, Income, Expenditure, Operating Profit, Net Profit, Investments, Branches, Staff, Priority Sector Advances, and Market Share of Public and Private Sector Banks from 2022–2026.',
+  file: '/pdfs/banking-statistics-2022-2026-final.pdf',
+  size: '8 MB',
+  category: 'Recruitment Analysis',
+  uploadedAt: 'Jun 2026',
+  type: 'PDF',
+  downloads: 0,
+},
 ]
 
 const CATEGORIES = [
