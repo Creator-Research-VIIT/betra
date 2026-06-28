@@ -49,6 +49,44 @@ const videos: VideoItem[] = [
     description:
       'Financial awareness, banking education, and research videos.',
   },
+  {
+  type: 'youtube',
+  src: 'https://www.youtube.com/embed/eqIQHySg1XM',
+  thumbnail:
+    'https://img.youtube.com/vi/eqIQHySg1XM/maxresdefault.jpg',
+  title: 'भारतीय बँकिंगचा इतिहास आणि प्रवास',
+  description:
+    'Financial awareness and educational video from Paryaya.',
+},
+
+{
+  type: 'youtube',
+  src: 'https://www.youtube.com/embed/Tct-YjRR-aI',
+  thumbnail:
+    'https://img.youtube.com/vi/Tct-YjRR-aI/maxresdefault.jpg',
+  title:
+    'बँकांचे राष्ट्रीयीकरण आणि परिणाम : एक क्रांतिकारी पाऊल',
+  description:
+    'Financial awareness and educational video from Paryaya.',
+},
+
+{
+  type: 'youtube',
+  src: 'https://www.youtube.com/embed/nkdt8C9ohHM',
+  thumbnail:
+    'https://img.youtube.com/vi/nkdt8C9ohHM/maxresdefault.jpg',
+  title: 'कर्ज देणं म्हणजे बँकेसाठी गणित',
+  description:
+    'Financial awareness and educational video from Paryaya.',
+},
+  {
+    type: 'youtube-link',
+    src: 'https://youtube.com/@paryayabettertomorrow',
+    thumbnail: '/gallery/gallery-14.png',
+    title: 'पर्याय YouTube Channel',
+    description:
+      'Financial awareness, banking education, and research videos.',
+  },
   
 ]
 
