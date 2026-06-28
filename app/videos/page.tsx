@@ -79,15 +79,6 @@ const videos: VideoItem[] = [
   description:
     'Financial awareness and educational video from Paryaya.',
 },
-  {
-    type: 'youtube-link',
-    src: 'https://youtube.com/@paryayabettertomorrow',
-    thumbnail: '/gallery/gallery-14.png',
-    title: 'पर्याय YouTube Channel',
-    description:
-      'Financial awareness, banking education, and research videos.',
-  },
-  
 ]
 
 export default function VideoSection() {
