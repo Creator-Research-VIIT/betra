@@ -186,6 +186,30 @@ const pdfFiles: PDFResource[] = [
   type: 'PDF',
   downloads: 0,
 },
+  {
+  id: 'press-release-marathi',
+  title: 'BETRA Press Release – Maharashtra Regional Banking Imbalance',
+  description:
+    'Marathi press release discussing regional and rural–urban imbalances in banking in Maharashtra and the need for policy intervention.',
+  file: '/pdfs/press-release-marathi.pdf',
+  size: 'PDF',
+  category: 'Recruitment Analysis',
+  uploadedAt: 'Aug 2026',
+  type: 'PDF',
+  downloads: 0,
+},
+{
+  id: 'regional-imbalance-banking-marathi',
+  title: 'The Regional Imbalance in Banking – Marathi',
+  description:
+    'Marathi report examining regional banking concentration, rural–urban credit imbalance, agricultural credit and regional development in Maharashtra.',
+  file: '/pdfs/regional-imbalance-in-banking-marathi.pdf',
+  size: 'PDF',
+  category: 'Recruitment Analysis',
+  uploadedAt: 'Aug 2026',
+  type: 'PDF',
+  downloads: 0,
+},
 ]
 
 const CATEGORIES = [
