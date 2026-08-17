@@ -114,6 +114,12 @@ const galleryItems: GalleryItem[] = [
     alt: 'A decade of the Insolvency & Bankruptcy Code raises a fundamental question: Why are concessions on lakh-crore corporate debts celebrated as reforms while relief to small borrowers is often criticized?',
     caption: "शेतकऱ्यांच्या काही हजार कोटी रुपयांच्या कर्जमाफीवर आर्थिक शिस्तीचे धडे दिले जातात; पण मोठ्या उद्योगसमूहांच्या लाखो कोटी रुपयांच्या कर्जांवरील प्रचंड सवलतींना आर्थिक सुधारणा म्हटले जाते. या दुहेरी निकषांचा जाब देशातील नागरिक विचारत आहेत.",
   },
+  {
+  type: 'image',
+  src: '/gallery/gallery-18.jpeg',
+  alt: 'Whither corporate governance in public sector banks?',
+  caption: 'Whither corporate governance in public sector banks?',
+},
   
 ]
 
