@@ -34,6 +34,7 @@ export interface PDFResource {
   | 'Fraud Prevention'
   | 'Digital Payments'
   | 'Ombudsman'
+  | 'Policy Paper'
   uploadedAt: string
   type: 'PDF' | 'DOCX' | 'PPT' | 'PPTX'
   downloads: number
@@ -210,6 +211,55 @@ const pdfFiles: PDFResource[] = [
   type: 'PDF',
   downloads: 0,
 },
+{
+  id: 'five-decades-of-regional-rural-banks',
+  title: 'Five Decades of Regional Rural Banks',
+  description:
+    'Critical policy paper marking fifty years of RRBs: their journey, role in rural credit, and the case for merging RRBs with public sponsor banks while preserving their public development mandate.',
+  file: '/pdfs/five-decades-of-regional-rural-banks.pdf',
+  size: 'PDF',
+  category: 'Policy Paper',
+  uploadedAt: 'Oct 2026',
+  type: 'PDF',
+  downloads: 0,
+},
+{
+  id: 'five-day-banking-reform',
+  title: 'Five-Day Banking: A Reform Whose Time Has Come',
+  description:
+    'Policy paper making the case for a five-day working week for bank employees, with 24×7 digital banking, assisted Saturday alternatives and a customer-protection compact.',
+  file: '/pdfs/five-day-banking-a-reform-whose-time-has-come.pdf',
+  size: 'PDF',
+  category: 'Policy Paper',
+  uploadedAt: 'Oct 2026',
+  type: 'PDF',
+  downloads: 0,
+},
+{
+  id: 'five-day-banking-reform-hindi',
+  title: 'Five-Day Banking: A Reform Whose Time Has Come – Hindi',
+  description:
+    'Hindi policy paper making the case for a five-day working week for bank employees, with 24×7 digital banking, assisted Saturday alternatives and a customer-protection compact.',
+  file: '/pdfs/five-day-banking-hindi.pdf',
+  size: 'PDF',
+  category: 'Policy Paper',
+  uploadedAt: 'Oct 2026',
+  type: 'PDF',
+  downloads: 0,
+},
+{
+  id: 'five-day-banking-reform-marathi',
+  title: 'Five-Day Banking: A Reform Whose Time Has Come – Marathi',
+  description:
+    'Marathi policy paper making the case for a five-day working week for bank employees, with 24×7 digital banking, assisted Saturday alternatives and a customer-protection compact.',
+  file: '/pdfs/five-day-banking-marathi.pdf',
+  size: 'PDF',
+  category: 'Policy Paper',
+  uploadedAt: 'Oct 2026',
+  type: 'PDF',
+  downloads: 0,
+},
+
 ]
 
 const CATEGORIES = [
@@ -221,6 +271,7 @@ const CATEGORIES = [
   'Fraud Prevention',
   'Digital Payments',
   'Ombudsman',
+  'Policy Paper',
 ] as const 
 type CategoryFilter = (typeof CATEGORIES)[number]
 
