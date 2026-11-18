@@ -260,6 +260,19 @@ const pdfFiles: PDFResource[] = [
   downloads: 0,
 },
 
+{
+  id: 'betra-rbi-psl-draft-directions-comments',
+  title: 'BETRA Comments to RBI on Draft Priority Sector Lending Directions',
+  description:
+    'BETRA\'s submission to the RBI on the draft PSL Directions of 5 November 2026, proposing a binding direct farm-credit floor, ceilings on borrower interest and effective cost, and borrower-benefit conditions for on-lending.',
+  file: '/pdfs/betra-rbi-psl-draft-directions-comments.pdf',
+  size: 'PDF',
+  category: 'Policy Paper',
+  uploadedAt: 'Nov 2026',
+  type: 'PDF',
+  downloads: 0,
+},
+
 ]
 
 const CATEGORIES = [
